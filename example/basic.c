@@ -1,17 +1,17 @@
 
 #include "vtm.h"
 
-int g_main_action_callback(struct vtm_menu *menu, struct vtm_item *item)
+int g_main_action_callback(const struct vtm_menu *menu, const struct vtm_item *item)
 {
         return 0;
 }
 
-int g_main_prop_getter(struct vtm_menu *menu, struct vtm_item *item, vtm_item_property_t prop, void *value)
+int g_main_prop_getter(const struct vtm_menu *menu, const struct vtm_item *item, vtm_item_property_t prop, void *value)
 {
         return 0;
 }
 
-VTM_MENU(g_menu, "Menu")
+VTM_MENU(g_menu, "Menu", g_main_prop_getter)
         VTM_ITEM_ACTION("Action1", 0x10000001, g_main_action_callback)
         VTM_ITEM_ACTION("Action2", 0x10000002, g_main_action_callback)
 
@@ -35,7 +35,7 @@ VTM_MENU_END();
 
 int main(int argc, char *argv[])
 {
-        vtm_init(&g_menu);
+        vtm_init(&g_menu, &vtm_render_term_vt100, NULL);
 
         while (1) {
                 vtm_service(&g_menu);

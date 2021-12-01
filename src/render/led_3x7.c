@@ -1,11 +1,20 @@
 #include "vtm_render.h"
 
-static void print_item(struct vtm_menu *menu, const char *name, int index, bool selected, bool enabled)
+static void init(struct vtm_menu *menu)
 {
         // TODO
 }
 
-struct vtm_render_iface vtm_render_led_3x7 = {
+static void print_item(struct vtm_menu *menu, const char *name, int index, bool selected, bool enabled)
+{
+        if (selected == false)
+                return;
+
+        // TODO
+}
+
+const struct vtm_render_iface vtm_render_led_3x7 = {
+        .init = init,
         .print_path = NULL,
         .print_separator = NULL,
         .print_item = print_item,
